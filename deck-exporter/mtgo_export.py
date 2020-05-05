@@ -1,3 +1,4 @@
+from tqdm import tqdm
 import pyautogui
 import time
 
@@ -19,6 +20,7 @@ def main():
     pyautogui.click(START_X, START_Y, button='left')
 
     deck_count = 1
+    pbar = tqdm(total=DECKS)
     # Scroll over decks and export
     while True:
         # Log current deck to console
@@ -40,9 +42,12 @@ def main():
         pyautogui.press('down')
 
         deck_count += 1
+        pbar.update(10)
 
         if deck_count == DECKS:
             break
+
+    pbar.close()
 
 
 if __name__ == '__main__':
