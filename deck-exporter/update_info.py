@@ -20,7 +20,7 @@ def search_deck(name, deck_list):
 
 def find_family(deck_name):
     """
-    Give a deck name, try to find the deck family.
+    Given a deck name, try to find the deck family.
     """
     FAMILIES = ['white', 'blue', 'black', 'red', 'green', 'selesnya', 'orzhov', 'boros', 'azorius', 'dimir', 'rakdos', 'golgari', 'izzet', 'simic', 'gruul', 'naya', 'esper', 'grixis', 'jund', 'bant', 'abzan', 'temur', 'jeskai', 'mardu', 'sultai', 'glint', 'dune', 'ink', 'whitch', 'yore', 'domain', 'colorless']
     for family in FAMILIES:
