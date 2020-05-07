@@ -68,7 +68,7 @@ def scryfall(card_name):
         # card_info['best_price'] = str(min([float(set_price[1]) for set_price in card_info['prices']]))
         card_info['best_price'] = min(card_info['prices'], key=lambda x:float(x[1]))
     else:
-        print(f'WARNING: No price found for {card_info["name"]}')
+        print(f'\nWARNING: No price found for {card_info["name"]}')
 
     # Get card data
     card_info['scryfall_uri'] = reprint_dict['data'][-1]['scryfall_uri']

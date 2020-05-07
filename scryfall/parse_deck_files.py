@@ -28,7 +28,7 @@ CARD_INFO_DICT = {}
 
 
 # Logging config
-logging.basicConfig(filename='log.txt', filemode='w', level=logging.DEBUG)
+logging.basicConfig(filename='log.txt', filemode='w', level=logging.INFO)
 
 
 def load_decks():
@@ -174,13 +174,7 @@ def main():
 
         # print(f"\nDeck {i + 1} of {total_decks} completed! ({deck['name']})")
         progress_bar.set_description(f"Completed {deck['name']}")
-
-        if i == 2:
-            # print(deck)
-            break
     
-    # print(all_decks[-1])
-
     # Save deck data to JSON
     with open(clean_file_path('decks.json'), 'w') as decks_json:
         json.dump(all_decks_list, decks_json, sort_keys=True, indent=2)
