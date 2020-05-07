@@ -1,53 +1,71 @@
-from tqdm import tqdm
+"""
+Script to automate exporting MTGO decks to file. 
+Automates the mouse and keyboard movement required to export 
+
+Notes:
+- You must have MTGO client open.
+- You must be on the Collection page.
+- You must select the first deck to export.
+- Only decks in the selected deck category are exported.
+- The DECK variable in the configuration section below defines how many decks are exported.
+- You can not change windows while the script is running.
+"""
+
 import pyautogui
 import time
+import sys
 
 
 # Configuration
-DECKS = 320  # Number of decks (how many saves are attempted)
-START_X = 16  # X start position in pixels for first deck (depends on screen resolution)
-START_Y = 372  # Y start position in pixels for first deck (depends on screen resolution)
+DECKS = 312  # Number of decks (how many saves are attempted)
 
 
 pyautogui.PAUSE = 0.5
 pyautogui.FAILSAFE = True
 
 
-def main():
-    # Reset position to top of list
-    x = START_X
-    y = START_Y
-    pyautogui.click(START_X, START_Y, button='left')
+def focus_mtgo_window():
+    "Focus the MTGO window by clicking the title bar (top)"
+    pyautogui.click(338, 9, button='left')
 
-    deck_count = 1
-    pbar = tqdm(total=DECKS)
+
+def main():
+    # Check if first deck is selected
+    prep = input('Have you selected the first deck you want to export? ([y]/n): ')
+    if prep not in ['', 'y', 'yes', 'Y', 'Yes']:
+        sys.exit('Please select the first deck you want to export and run the script again.')
+
+    print("works")
+
+    # Focus MTGO window
+    focus_mtgo_window()
+
     # Scroll over decks and export
+    deck_count = 1
     while True:
         # Log current deck to console
         print(f'Exporting Deck {deck_count}...')
 
         # Press context menu key
         pyautogui.hotkey('shift','f10')
+        # pyautogui.hotkey('apps')
 
-        # Click Export
-        pyautogui.click(59, 620, button='left')
+        # Use keyboard to select Export from the context menu
+        pyautogui.typewrite(['down', 'down', 'down', 'down', 'enter'])
 
-        # Use keyboard to select file type and save: TAB, DOWN, DOWN, ENTER
+        # Use keyboard to select file type and save
         pyautogui.typewrite(['tab', 'down', 'down', 'enter', 'enter'])
 
         # Focus MTGO window
-        pyautogui.click(338, 9, button='left')
+        focus_mtgo_window()
         
         # Press down to go to next deck
         pyautogui.press('down')
 
         deck_count += 1
-        pbar.update(10)
 
         if deck_count == DECKS:
             break
-
-    pbar.close()
 
 
 if __name__ == '__main__':

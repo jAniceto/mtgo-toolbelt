@@ -4,7 +4,7 @@ import os
 # Configuration
 BASE_DIR = 'decks'
 SUB_DIRS = ['banned', 'ready']
-BANNED_CARDS = ['Daze', 'Gitaxian Probe', 'Gush']
+BANNED_CARDS = ['Daze', 'Gitaxian Probe', 'Gush', "Arcum's Astrolabe"]
 STRIP_CHARS = ['#T1 ', '#T2 ', '.txt']
 ORGANIZE = True
 
